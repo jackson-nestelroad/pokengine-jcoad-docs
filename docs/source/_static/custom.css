@@ -17,3 +17,12 @@
 .red {
     color: #cc0000;
 }
+
+.rst-content .code-block-caption {
+    text-align: start;
+}
+
+.rst-content dl.jcoad.trigger dt em.property,
+ .rst-content dl.jcoad.property dt em.property {
+    padding-right: 0 !important;
+}

@@ -15,6 +15,7 @@ Contents
     :maxdepth: 2
 
     /jcoad/introduction
+    /jcoad/objects
 
 Credits
 =======
