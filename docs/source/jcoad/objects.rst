@@ -96,3 +96,23 @@ Object Functions
         :type: sprite sheet
 
         Footprint sprite sheet.
+
+    .. param:: frames
+        :type: number
+
+        Number of frames in the sprite sheet.
+
+    .. param:: speed
+        :type: number
+
+        Speed of the animation.
+
+    .. param:: fade
+        :type: number
+
+        Time to fade in milliseconds.
+
+    .. param:: directional
+        :type: 0/1
+
+        Based on direction?

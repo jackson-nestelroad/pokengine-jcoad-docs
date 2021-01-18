@@ -17,6 +17,10 @@ jCoad does not really have data types, but putting arguments into the proper for
 
     A direction the player can face.
 
+.. jcoad:type:: 0/1
+
+    A binary digit, representing a boolean value. 1 represents "on" or "true," while 0 represents "off" or "false."
+
 .. jcoad:type:: sprite sheet
     :examples: 2654/sprites.png
         1995/door.png
