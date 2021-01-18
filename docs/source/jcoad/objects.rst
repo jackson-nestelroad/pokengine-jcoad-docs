@@ -221,7 +221,7 @@ Object Functions
 
     .. param:: direction
         :type: direction
-        :default: Player will spin in the direction they were facing
+        :default: Player will slide in the direction they were facing
 
         Direction to slide the player in. If omitted, the player will slide in the direction they are currently facing.
 
