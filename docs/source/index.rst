@@ -16,6 +16,7 @@ Contents
 
     /jcoad/introduction
     /jcoad/objects
+    /jcoad/pokemon_generation
     /jcoad/types
 
 Credits

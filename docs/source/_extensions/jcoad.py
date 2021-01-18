@@ -13,7 +13,7 @@ from sphinx.domains import Domain, ObjType
 from sphinx.environment import BuildEnvironment
 from sphinx.locale import _, __
 from sphinx.roles import XRefRole
-from sphinx.util import logging
+from sphinx.util import logging, docutils
 from sphinx.util.docutils import SphinxDirective
 from sphinx.util.nodes import make_id, make_refnode
 
@@ -52,9 +52,21 @@ class ParamDirective(SphinxDirective):
         name_node += nodes.strong('', name)
         if 'type' in self.options and self.options['type']:
             name_node += nodes.Text(' (')
+            types = self.options['type'].split('|')
             type_role: JCoadTypeXRefRole = self.env.get_domain('jcoad').role('type')
-            result = type_role('type', '', self.options['type'], self.lineno, self.state.inliner)
-            name_node += result[0]
+
+            put_separator = False
+            for ref_type in types:
+                if not put_separator:
+                    put_separator = True
+                else:
+                    name_node += nodes.Text(' | ')
+
+                if ref_type[0] == '"' and ref_type[-1] == '"':
+                    name_node += docutils.roles.code_role('code', '', ref_type[1:-1], self.lineno, self.state.inliner)[0]
+                else:
+                    name_node += type_role('type', '', ref_type, self.lineno, self.state.inliner)[0]
+
             name_node += nodes.Text(')')
         param_node += name_node
 
@@ -74,6 +86,7 @@ class JCoadObject(ObjectDescription):
     # Prefix right before documentation entry
     display_prefix = None   # type: str
     display_code_block = True   # type: bool
+    space_between_suffix = False    # type: bool
 
     option_spec = {
         'prefix': directives.unchanged,
@@ -149,20 +162,25 @@ class JCoadObject(ObjectDescription):
             contentnode += code_block_directive.run()[0]
 
         if self.display_code_block:
-            name, prefix = self.names[0]
-            code_block_content = name
-            if 'suffix' in self.options:
-                code_block_content += self.options['suffix']
-            if 'prefix' in self.options:
-                code_block_content = self.options['prefix'] + code_block_content
-            if prefix:
-                code_block_content = prefix + code_block_content
+            code_block_content = []
+            for name_prefix in self.names:
+                name, prefix = name_prefix
+                line = name
+                if 'suffix' in self.options:
+                    if self.space_between_suffix:
+                        line += ' '
+                    line += self.options['suffix']
+                if 'prefix' in self.options:
+                    line = self.options['prefix'] + line
+                if prefix:
+                    line = prefix + line
+                code_block_content.append(line)
 
             code_block_directive = CodeBlock(
                 name='code-block',
                 arguments=[],
                 options={},
-                content=[code_block_content],
+                content=code_block_content,
                 lineno=self.lineno,
                 content_offset=self.content_offset,
                 block_text='',
@@ -193,6 +211,10 @@ class JCoadType(JCoadObject):
     display_prefix = '(type) '
     display_code_block = False
 
+class JCoadPokemonOption(JCoadObject):
+    display_prefix = ''
+    space_between_suffix = True
+
 
 class JCoadFunctionXRefRole(XRefRole):
     def process_link(self, env: BuildEnvironment, refnode: Element,
@@ -212,19 +234,6 @@ class JCoadTriggerXRefRole(XRefRole):
         return '&' + title, target
 
 
-class JCoadVariableXRefRole(XRefRole):
-    def process_link(self, env: BuildEnvironment, refnode: Element,
-                     has_explicit_title: bool, title: str, target: str) -> Tuple[str, str]:
-        return title, target
-
-
-class JCoadTypeXRefRole(XRefRole):
-    def process_link(self, env: BuildEnvironment, refnode: Element,
-                     has_explicit_title: bool, title: str, target: str) -> Tuple[str, str]:
-        return title, target
-
-
-
 class JCoadDomain(Domain):
     name = 'jcoad'
     label = 'jCoad'
@@ -234,7 +243,8 @@ class JCoadDomain(Domain):
         'property':     ObjType(_('property'), 'prop'),
         'trigger':      ObjType(_('trigger'), 'trigger'),
         'variable':     ObjType(_('variable'), 'var'),
-        'type':         ObjType(_('type'), 'type')
+        'type':         ObjType(_('type'), 'type'),
+        'pokeoption':   ObjType(_('pokeoption'), 'pokeoption')
     }
 
     directives = {
@@ -243,14 +253,16 @@ class JCoadDomain(Domain):
         'variable':     JCoadVariable,
         'property':     JCoadProperty,
         'type':         JCoadType,
+        'pokeoption':   JCoadPokemonOption,
     }
 
     roles = {
         'func': JCoadFunctionXRefRole(),
         'prop': JCoadPropertyXRefRole(),
         'trigger': JCoadTriggerXRefRole(),
-        'var': JCoadVariableXRefRole(),
-        'type': JCoadTypeXRefRole(),
+        'var': XRefRole(),
+        'type': XRefRole(),
+        'pokeoption': XRefRole(),
     }
 
     initial_data = {
@@ -274,7 +286,7 @@ class JCoadDomain(Domain):
 
     def find_obj(self, name: str, typ: str) -> Tuple[str, str, str]:
         objtype = next((x for x in self.object_types if self.object_types[x].roles[0] == typ), None)
-        return self.objects.get(objtype + '-' + name)
+        return self.objects.get(objtype + '-' + name) if objtype is not None else None
 
     def resolve_xref(self, env: BuildEnvironment, fromdocname: str, builder: Builder,
                      typ: str, target: str, node: pending_xref, contnode: Element

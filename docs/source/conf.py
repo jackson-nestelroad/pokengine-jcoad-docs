@@ -33,7 +33,14 @@ global_rst_file = 'global.rst'
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
 sys.path.append(os.path.abspath('_extensions'))
-extensions = ['jcoad']
+extensions = [
+    'sphinx.ext.autosectionlabel',
+    'jcoad'
+]
+
+autosectionlabel_prefix_document = True
+
+highlight_language = 'none'
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
