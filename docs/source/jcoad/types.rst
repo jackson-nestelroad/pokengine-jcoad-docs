@@ -2,7 +2,7 @@
 Data Types
 ##########
 
-jCoad does not really have data types, but putting arguments into the proper format for object functions, properties, and triggers is absolutely necessary for your code to work properly. Use this guide to understand how enter arguments into your jCoad.
+jCoad does not really have data types, but putting arguments into the proper format for object functions, properties, and triggers is absolutely necessary for your code to work properly. Use this guide to understand how to enter arguments into your jCoad.
 
 .. jcoad:type:: string
 
