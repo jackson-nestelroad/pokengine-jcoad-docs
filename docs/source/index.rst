@@ -16,6 +16,7 @@ Contents
 
     /jcoad/introduction
     /jcoad/objects
+    /jcoad/types
 
 Credits
 =======

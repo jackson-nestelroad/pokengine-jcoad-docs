@@ -37,3 +37,62 @@ Object Functions
 
     Offsets the display position of the object.
 
+    .. param:: x
+        :type: number
+
+        Horizontal offset in pixels.
+
+    .. param:: y
+        :type: number
+
+        Vertical offset in pixels.
+
+.. jcoad:function:: solid
+    :suffix: ([type])
+
+    Makes the tile solid. Give a specific direction to customize which edge of the tile is solid.
+
+    .. param:: type
+        :type: direction
+        :options: up, down, left, right, all, race, 0
+        :default: all
+
+.. jcoad:function:: msg
+    :suffix: ([text])[&triggers]
+
+    Displays a textbox message after interacting with the tile.
+
+    .. param:: text
+        :type: string
+        :default: Empty textbox
+
+.. jcoad:function:: answer
+    :prefix: Answer=
+    :suffix: ([text])[&triggers]
+    :examples:
+        msg(Take the fruit?)&answers=Yes,No
+        Yes=answer(You took the fruit.)
+        No=answer(You left the fruit.)
+
+    Defines the response to specified answers. Use this code after specifying answer options with the :jcoad:trigger:`answers` trigger.
+
+    .. param:: Answer
+        :type: string
+
+        Answer given by the player, such as "Yes" or "No."
+
+    .. param:: text
+        :type: string
+        :default: No textbox
+
+        Textbox response to the player's answer.
+
+.. jcoad:function:: prints
+    :suffix: (sprite[,frames[,speed[,fade[,directional]]]])
+
+    Draws footprints when the player walks offtile.
+
+    .. param:: sprite
+        :type: sprite sheet
+
+        Footprint sprite sheet.

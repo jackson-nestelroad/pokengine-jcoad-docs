@@ -26,3 +26,11 @@
  .rst-content dl.jcoad.property dt em.property {
     padding-right: 0 !important;
 }
+
+.rst-content dl.jcoad dd .param .details {
+    margin-left: 24px;
+}
+
+.rst-content dl.jcoad dd .param .details .option {
+    font-size: 85%;
+}

@@ -14,17 +14,72 @@ from sphinx.environment import BuildEnvironment
 from sphinx.locale import _, __
 from sphinx.roles import XRefRole
 from sphinx.util import logging
+from sphinx.util.docutils import SphinxDirective
 from sphinx.util.nodes import make_id, make_refnode
 
 logger = logging.getLogger(__name__)
 
 
+class ParamDirective(SphinxDirective):
+    has_content = True
+    required_arguments = 0
+    optional_arguments = 4
+    final_argument_whitespace = True
+    option_spec = {
+        'type': directives.unchanged,
+        'format': directives.unchanged,
+        'default': directives.unchanged,
+        'options': directives.unchanged,
+    }
+
+    def make_option_node(self, option: str, label: str) -> nodes.paragraph:
+        if option in self.options and self.options[option]:
+            option_node = nodes.paragraph()
+            option_node['classes'] = ['option']
+            option_node += nodes.strong('', label + ': ')
+            option_node += nodes.Text(self.options[option])
+            return option_node
+
+    def run(self):
+        if not self.arguments:
+            raise self.error('Missing parameter name')
+
+        name = self.arguments[0]
+
+        param_node = nodes.container()
+        param_node['classes'] = ['param']
+        name_node = nodes.paragraph()
+        name_node += nodes.strong('', name)
+        if 'type' in self.options and self.options['type']:
+            name_node += nodes.Text(' (')
+            type_role: JCoadTypeXRefRole = self.env.get_domain('jcoad').role('type')
+            result = type_role('type', '', self.options['type'], self.lineno, self.state.inliner)
+            name_node += result[0]
+            name_node += nodes.Text(')')
+        param_node += name_node
+
+        details_node = nodes.container()
+        details_node['classes'] = ['details']
+        self.state.nested_parse(self.content, self.content_offset, details_node)
+
+        details_node += self.make_option_node('format', 'Format')
+        details_node += self.make_option_node('options', 'Options')
+        details_node += self.make_option_node('default', 'Default')
+
+        param_node += details_node
+        return [param_node]
+
+
 class JCoadObject(ObjectDescription):
     # Prefix right before documentation entry
-    prefix = None   # type: str
+    display_prefix = None   # type: str
+    display_code_block = True   # type: bool
 
     option_spec = {
+        'prefix': directives.unchanged,
         'suffix': directives.unchanged,
+        'options': directives.unchanged,
+        'examples': directives.unchanged,
         'noindex': directives.flag,
         'noindexentry': directives.flag,
     }
@@ -32,23 +87,22 @@ class JCoadObject(ObjectDescription):
     def handle_signature(self, sig: str, signode: desc_signature) -> Tuple[str, str]:
         name = sig.strip()
 
-        if self.prefix:
-            signode += addnodes.desc_annotation(self.prefix, self.prefix)
+        if self.display_prefix:
+            signode += addnodes.desc_annotation('', self.display_prefix)
 
         signode += addnodes.desc_name(name, name)
 
-        return name, self.prefix
+        return name, self.display_prefix
 
     def add_target_and_index(self, name_prefix: Tuple[str, str], sig: str, signode: desc_signature) -> None:
-        fullname = self.objtype + '-' + name_prefix[0]
+        refname = self.objtype + '-' + name_prefix[0]
         node_id = make_id(self.env, self.state.document, '', sig)
         signode['ids'].append(node_id)
 
         self.state.document.note_explicit_target(signode)
 
         domain = self.env.get_domain('jcoad')
-        print(fullname)
-        domain.add_object(fullname, self.objtype, node_id, location=signode)
+        domain.add_object(refname, self.objtype, node_id, location=signode)
 
         if 'noindexentry' not in self.options:
             indextext = self.get_index_text(name_prefix)
@@ -60,27 +114,63 @@ class JCoadObject(ObjectDescription):
         return _('%s%s (%s)') % (name, prefix, self.objtype) if self.objtype else ''
 
     def transform_content(self, contentnode: addnodes.desc_content) -> None:
-        name, prefix = self.names[0]
+        if 'options' in self.options:
+            code_block_directive = CodeBlock(
+                name='code-block',
+                arguments=[],
+                options={
+                    'caption': 'Options',
+                },
+                content=[self.options['options']],
+                lineno=self.lineno,
+                content_offset=self.content_offset,
+                block_text='',
+                state=self.state,
+                state_machine=self.state_machine
+            )
 
-        code_block_content = name
-        if 'suffix' in self.options:
-            code_block_content += self.options['suffix']
-        if prefix:
-            code_block_content = prefix + code_block_content
+            contentnode += code_block_directive.run()[0]
 
-        code_block_directive = CodeBlock(
-            name='code-block',
-            arguments=[],
-            options={},
-            content=[code_block_content],
-            lineno=self.lineno,
-            content_offset=self.content_offset,
-            block_text='',
-            state=self.state,
-            state_machine=self.state_machine
-        )
+        if 'examples' in self.options:
+            code_block_directive = CodeBlock(
+                name='code-block',
+                arguments=[],
+                options={
+                    'caption': 'Examples',
+                },
+                content=[self.options['examples']],
+                lineno=self.lineno,
+                content_offset=self.content_offset,
+                block_text='',
+                state=self.state,
+                state_machine=self.state_machine
+            )
 
-        contentnode.insert(0, code_block_directive.run()[0])
+            contentnode += code_block_directive.run()[0]
+
+        if self.display_code_block:
+            name, prefix = self.names[0]
+            code_block_content = name
+            if 'suffix' in self.options:
+                code_block_content += self.options['suffix']
+            if 'prefix' in self.options:
+                code_block_content = self.options['prefix'] + code_block_content
+            if prefix:
+                code_block_content = prefix + code_block_content
+
+            code_block_directive = CodeBlock(
+                name='code-block',
+                arguments=[],
+                options={},
+                content=[code_block_content],
+                lineno=self.lineno,
+                content_offset=self.content_offset,
+                block_text='',
+                state=self.state,
+                state_machine=self.state_machine
+            )
+
+            contentnode.insert(0, code_block_directive.run()[0])
 
 
 class JCoadFunction(JCoadObject):
@@ -88,15 +178,20 @@ class JCoadFunction(JCoadObject):
 
 
 class JCoadProperty(JCoadObject):
-    prefix = 'name.'
+    display_prefix = 'name.'
 
 
 class JCoadTrigger(JCoadObject):
-    prefix = '&'
+    display_prefix = '&'
 
 
 class JCoadVariable(JCoadObject):
-    prefix = '(var) '
+    display_prefix = '(var) '
+
+
+class JCoadType(JCoadObject):
+    display_prefix = '(type) '
+    display_code_block = False
 
 
 class JCoadFunctionXRefRole(XRefRole):
@@ -123,6 +218,13 @@ class JCoadVariableXRefRole(XRefRole):
         return title, target
 
 
+class JCoadTypeXRefRole(XRefRole):
+    def process_link(self, env: BuildEnvironment, refnode: Element,
+                     has_explicit_title: bool, title: str, target: str) -> Tuple[str, str]:
+        return title, target
+
+
+
 class JCoadDomain(Domain):
     name = 'jcoad'
     label = 'jCoad'
@@ -132,6 +234,7 @@ class JCoadDomain(Domain):
         'property':     ObjType(_('property'), 'prop'),
         'trigger':      ObjType(_('trigger'), 'trigger'),
         'variable':     ObjType(_('variable'), 'var'),
+        'type':         ObjType(_('type'), 'type')
     }
 
     directives = {
@@ -139,6 +242,7 @@ class JCoadDomain(Domain):
         'trigger':      JCoadTrigger,
         'variable':     JCoadVariable,
         'property':     JCoadProperty,
+        'type':         JCoadType,
     }
 
     roles = {
@@ -146,6 +250,7 @@ class JCoadDomain(Domain):
         'prop': JCoadPropertyXRefRole(),
         'trigger': JCoadTriggerXRefRole(),
         'var': JCoadVariableXRefRole(),
+        'type': JCoadTypeXRefRole(),
     }
 
     initial_data = {
@@ -187,6 +292,7 @@ class JCoadDomain(Domain):
 
 def setup(app: Sphinx) -> Dict[str, Any]:
     app.add_domain(JCoadDomain)
+    app.add_directive('param', ParamDirective)
 
     return {
         'version': 'builtin',
