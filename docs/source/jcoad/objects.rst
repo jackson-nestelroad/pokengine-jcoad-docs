@@ -180,7 +180,7 @@ Object Functions
     Creates a door object that animates when the user walks through it.
 
     .. param:: sprite
-        :type: sprite sheet:
+        :type: sprite sheet
 
         Door sprite sheet.
 
@@ -290,6 +290,84 @@ Object Functions
 
         Item sprite sheet.
 
-.. admonition:: TO DO
+.. jcoad:function:: heal
+    :suffix: (sprite,ball_width,ball_height[,ball_offset_x,ball_offset_y[,ball_margin_x,ball_margin_y]])
 
-    More to come!
+    Heals the player's party and creates a healing animation like the one used in a |Pokemon| Center.
+
+    .. param:: sprite
+        :type: sprite sheet
+
+        Healing sprite sheet. |Poke| Balls must be in the lower left-hand corner. Machine must be in the upper left-hand corner.
+
+    .. param:: ball_width
+        :type: number
+
+        Width of the individual ball sprite in pixels.
+
+    .. param:: ball_height
+        :type: number
+
+        Height of the individual ball sprite in pixels.
+
+    .. param:: ball_offset_x
+        :type: number
+        :default: 0
+
+        Number of pixels to displace the drawing of the |Poke| Ball sprites in the x-direction.
+
+    .. param:: ball_offset_y
+        :type: number
+        :default: 0
+
+        Number of pixels to displace the drawing of the |Poke| Ball sprites in the y-direction.
+
+    .. param:: ball_margin_x
+        :type: number
+        :default: 0 (touching)
+
+        The number of pixels to draw between the |Poke| Balls in the x-direction.
+
+    .. param:: ball_margin_y
+        :type: number
+        :default: 0 (touching)
+
+        The number of pixels to draw between the |Poke| Balls in the y-direction.
+
+.. jcoad:function:: shop
+    :suffix: (item[:price],[item[:price],...])
+
+    Creates a shop with the listed items and prices. An infinite list of items can be provided, with each item being separated by a comma.
+
+    .. param:: item
+        :type: string|number
+
+        Item name or number to sell.
+
+    .. param:: price
+        :type: number
+        :default: Default price
+
+        Price for one item. This price cannot be less than the item's sell price.
+
+.. jcoad:function:: height
+    :suffix: (height)
+
+    Creates an invisible wall with the specified height. If short enough, the wall can be jumped over.
+
+    .. param:: height
+        :type: number
+
+        Height in pixels the player must jump to cross the tile.
+
+.. jcoad:function:: execute
+    :suffix: (triggers)
+
+    Executes game triggers immediately when the map loads. To make the triggers tile specific, use :code:`if ontile` before this code. See :jcoad:var:`ontile`.
+
+    See the :ref:`Game Triggers<game_triggers>` guide for a list of triggers to use.
+
+    .. param:: triggers
+        :type: string
+
+        String of triggers to execute. The first trigger should not start with an ampersand, but all chained triggers should.

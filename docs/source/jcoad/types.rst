@@ -27,7 +27,7 @@ jCoad does not really have data types, but putting arguments into the proper for
 .. jcoad:type:: rgba
     :examples:
         [255,0,0,1] => Red, 100% opacity
-        [255,0,0.5] => Red, 50% opacity
+        [255,0,0,0.5] => Red, 50% opacity
 
     A color given in RGBA (red-green-blue-alpha) format. The format is :code:`[0-255,0-255,0-255,0-1]`. Only the final number can be a floating-point value.
 
@@ -45,4 +45,4 @@ jCoad does not really have data types, but putting arguments into the proper for
 
 .. jcoad:type:: unit interval
 
-    A floating-point number between 0 and 1 (inclusive). Usually used for representing percentages.
+    A floating-point number between 0 and 1 (inclusive), such as :code:`0`, :code:`0.125`, :code:`0.783`, or :code:`1`. Usually used for representing percentages.
