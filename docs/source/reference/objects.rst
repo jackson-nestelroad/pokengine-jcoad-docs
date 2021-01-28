@@ -220,7 +220,7 @@ If you are unsure how to use these object functions, check out the :ref:`objects
         Sprite that displays as the object to be cut.
 
 .. jcoad:function:: strength
-    :suffix: ([sprite])
+    :suffix: ([sprite][,slide])
 
     Creates a heavy object that can be pushed with the move "Strength."
 
@@ -229,6 +229,12 @@ If you are unsure how to use these object functions, check out the :ref:`objects
         :default: Region sprite
 
         Sprite that displays as the object to be pushed.
+
+    .. param:: slide
+        :type: 0/1
+        :default: 0
+
+        Slide in one direction on touch?
 
 .. jcoad:function:: surf
     :suffix: ([direction])
