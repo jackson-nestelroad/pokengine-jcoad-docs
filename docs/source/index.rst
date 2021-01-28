@@ -24,10 +24,11 @@ Get started by clicking :ref:`here<introduction>`!
     /tutorial/objects
 
 Reference
-========
+=========
 Already know the ropes and looking for documentation? Look no further!
 
 - :ref:`object_functions`
+- :ref:`triggers`
 - :ref:`types`
 - :ref:`pokemon_generation`
 
@@ -37,6 +38,7 @@ Already know the ropes and looking for documentation? Look no further!
     :caption: Reference
 
     /reference/objects
+    /reference/triggers
     /reference/types
     /reference/pokemon_generation
 
