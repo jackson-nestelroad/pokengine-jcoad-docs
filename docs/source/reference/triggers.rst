@@ -291,13 +291,13 @@ Entity Manpulation
 .. jcoad:trigger:: print
     :suffix: [=type]
 
-    ???
+    Creates a fading trail behind the target.
 
     .. param:: type
-        :type: ???
-        :default: Unsets
+        :type: string
+        :default: No trail
 
-        ???
+        Type of trail to draw.
 
 .. jcoad:trigger:: outline
     :suffix: [=color]
