@@ -884,7 +884,7 @@ Client Properties
     Generates a filter over the game screen.
 
     .. param:: type
-        :type: string:
+        :type: string
         :default: Remove any filter
         :options: crt, oldfilm, glitch, shockwave, bloom, ascii, godray, rgbsplitter, pixelate, underwater
 
@@ -903,7 +903,7 @@ Other
     ???
 
     .. param:: target
-        :type: number
+        :type: string
         :default: ???
 
         ???
@@ -914,7 +914,7 @@ Other
     ???
 
     .. param:: target
-        :type: number
+        :type: string
         :default: ???
 
         ???
