@@ -499,22 +499,6 @@ Any object function ending with :code:`[&triggers]` may have an optional string 
 
         The number of pixels to draw between the |Poke| Balls in the y-direction.
 
-.. jcoad:function:: shop
-    :suffix: (item[:price],[item[:price],...])
-
-    Creates a shop with the listed items and prices. An infinite list of items can be provided, with each item being separated by a comma.
-
-    .. param:: item
-        :type: string|number
-
-        Item name or number to sell.
-
-    .. param:: price
-        :type: number
-        :default: Default price
-
-        Price for one item. This price cannot be less than the item's sell price.
-
 .. jcoad:function:: height
     :suffix: (height)
 

@@ -6,6 +6,9 @@ Triggers
 
 If you are unsure how to use these triggers, check out the :ref:`triggers tutorial<triggers_tutorial>`.
 
+Programming
+===========
+
 .. jcoad:trigger:: pause
     :suffix: =ms
 
@@ -72,6 +75,28 @@ If you are unsure how to use these triggers, check out the :ref:`triggers tutori
 
         New value of the variable.
 
+Entity Manpulation
+==================
+
+.. jcoad:trigger:: freeze
+
+    Freezes the target completely.
+
+.. jcoad:trigger:: unfreeze
+
+    Unfreezes the target.
+
+.. jcoad:trigger:: destroy
+    :suffix: [=target]
+
+    Permanently destroys the target.
+
+    .. param:: target
+        :type: string
+        :default: The current target
+
+        Target to destroy.
+
 .. jcoad:trigger:: jump
     :suffix: [=height]
 
@@ -82,6 +107,16 @@ If you are unsure how to use these triggers, check out the :ref:`triggers tutori
         :default: 8
 
         Number of pixels to jump.
+
+.. jcoad:trigger:: direction
+    :suffix: =direction
+
+    Causes the target to face the given direction.
+
+    .. param:: direction
+        :type: short direction
+
+        Direction to face.
 
 .. jcoad:trigger:: path
     :suffix: [=path]
@@ -104,17 +139,6 @@ If you are unsure how to use these triggers, check out the :ref:`triggers tutori
         :default: 100
 
         Percentage of normal speed. Use :code:`50` for half speed, or use :code:`200` for double speed.
-
-.. jcoad:trigger:: zoom
-    :suffix: [=scale]
-
-    Changes the client's game window scale.
-
-    .. param:: zoom
-        :type: number
-        :default: 2
-
-        Zoom setting. Use :code:`1` for 100%, or use :code:`0.5` for 50%.
 
 .. jcoad:trigger:: icon
     :suffix: [=id]
@@ -139,83 +163,6 @@ If you are unsure how to use these triggers, check out the :ref:`triggers tutori
         :default: Removes any icon
 
         Icon ID to display.
-
-.. jcoad:trigger:: view
-    :suffix: [=wxh]
-
-    Sets the dimensions of the client's game window.
-
-    .. param:: wxh
-        :type: area|"normal"
-        :default: normal
-
-        Width and height of the game window. Use :code:`normal` to reset.
-
-.. jcoad:trigger:: fadeout
-    :suffix: [=color]
-
-    Fades the screen out to a solid color.
-
-    .. param:: color
-        :type: hex
-        :default: Black
-
-        Solid color to fade out to.
-
-.. jcoad:trigger:: fadein
-    :suffix: [=color]
-
-    Fades the screen in, starting from the given color.
-
-    .. param:: color
-        :type: hex
-        :default: Black
-
-        Solid color to fade in from.
-
-.. jcoad:trigger:: flash
-    :suffix: [=color]
-
-    Flashes the screen with a solid color.
-
-    .. param:: color
-        :type: hex
-        :default: White
-
-        Solid color to flash.
-
-.. jcoad:trigger:: direction
-    :suffix: =direction
-
-    Causes the target to face the given direction.
-
-    .. param:: direction
-        :type: short direction
-
-        Direction to face.
-
-.. jcoad:trigger:: freeze
-
-    Freezes the target completely.
-
-.. jcoad:trigger:: unfreeze
-
-    Unfreezes the target.
-
-.. jcoad:trigger:: warp
-    :suffix: =map,spawn
-
-    Warps the player to a spawn point on a different map.
-
-    .. param:: map
-        :type: number
-
-        Map ID to warp to.
-
-    .. param:: spawn
-        :type: number
-
-        Spawn ID to warp to.
 
 .. jcoad:trigger:: xy
     :suffix: =x,y
@@ -251,6 +198,21 @@ If you are unsure how to use these triggers, check out the :ref:`triggers tutori
         :default: Current direction
 
         Direction to face while moving.
+
+.. jcoad:trigger:: follow
+    :suffix: [=target]
+
+    Forces the current target to follow another target.
+
+    .. param:: target
+        :type: string
+        :default: Unfollows
+
+        Target to follow
+
+.. jcoad:trigger:: behindplayer
+
+    Puts the current target behind the player.
 
 .. jcoad:trigger:: outfit
     :suffix: =skin
@@ -292,40 +254,6 @@ If you are unsure how to use these triggers, check out the :ref:`triggers tutori
         :type: skin
 
         Overworld skin of following ally. For multiple allies, separate with spaces.
-
-.. jcoad:trigger:: battle
-    :suffix: =whom
-
-    ???
-
-    .. param:: whom
-        :type: ???
-
-        ???
-
-.. jcoad:trigger:: noblackout
-
-    ???
-
-.. jcoad:trigger:: textbox
-    :suffix: [=text]
-
-    .. param:: text
-        :type: string
-        :default: Destroys the current textbox
-
-        Text to display.
-
-.. jcoad:trigger:: destroy
-    :suffix: [=target]
-
-    Permanently destroys the target.
-
-    .. param:: target
-        :type: string
-        :default: The current target
-
-        Target to destroy.
 
 .. jcoad:trigger:: floating
     :suffix: [=height]
@@ -370,32 +298,6 @@ If you are unsure how to use these triggers, check out the :ref:`triggers tutori
         :default: Unsets
 
         ???
-
-.. jcoad:trigger:: msg
-    :suffix: [=target]
-
-    ???
-
-    .. param:: target
-        :type: string
-        :default: ???
-
-        ???
-
-.. jcoad:trigger:: follow
-    :suffix: [=target]
-
-    Forces the current target to follow another target.
-
-    .. param:: target
-        :type: string
-        :default: Unfollows
-
-        Target to follow
-
-.. jcoad:trigger:: behindplayer
-
-    Puts the current target behind the player.
 
 .. jcoad:trigger:: outline
     :suffix: [=color]
@@ -474,6 +376,9 @@ If you are unsure how to use these triggers, check out the :ref:`triggers tutori
 
         Target's opacity.
 
+Sprite Manipulation
+===================
+
 .. jcoad:trigger:: animate
     :suffix: [=percentage]
 
@@ -496,17 +401,325 @@ If you are unsure how to use these triggers, check out the :ref:`triggers tutori
 
         Frame number to pause on.
 
-.. jcoad:trigger:: filter
-    :suffix: [=type]
+.. jcoad:trigger:: sprite
+    :suffix: [name]=x,y,file,depth,image_x,image_y,image_width,image_height,frames,speed,loop,unsynced
 
-    Generates a filter over the game screen.
+    Adds a new (potentially animated) sprite to the map. See :jcoad:func:`animation`.
 
-    .. param:: type
-        :type: string:
-        :default: Remove any filter
-        :options: crt, oldfilm, glitch, shockwave, bloom, ascii, godray, rgbsplitter, pixelate, underwater
+Player Events
+=============
 
-        Filter to display.
+.. jcoad:trigger:: warp
+    :suffix: =map,spawn
+
+    Warps the player to a spawn point on a different map.
+
+    .. param:: map
+        :type: number
+
+        Map ID to warp to.
+
+    .. param:: spawn
+        :type: number
+
+        Spawn ID to warp to.
+
+.. jcoad:trigger:: textbox
+    :suffix: [=text]
+
+    .. param:: text
+        :type: string
+        :default: Destroys the current textbox
+
+        Text to display.
+
+.. jcoad:trigger:: answers
+    :suffix: =answer1[,answer2,...]
+
+    Gives the player one or more answers to select. Answers should be separated by commas.
+
+    .. param:: answer
+        :type: string
+
+        A single answer.
+
+.. jcoad:trigger:: battle
+    :suffix: =id
+
+    Initiates a battle.
+
+    .. param:: id
+        :type: number
+
+        Battle ID to initiate.
+
+.. jcoad:trigger:: noblackout
+
+    Prevents blacking out (losing a battle) from warping the user back to a heal point.
+
+.. jcoad:trigger:: msg
+    :suffix: [=target]
+
+    ???
+
+    .. param:: target
+        :type: string
+        :default: ???
+
+        ???
+
+.. jcoad:trigger:: item
+    :suffix: =item[,amount]
+
+    Gives the player a given amount of some item.
+
+    .. param:: item
+        :type: string|number
+
+        Name or ID number of the item.
+
+    .. param:: amount
+        :type: number
+        :default: 1
+
+        Number of items to give. Use a negative number to take items away from the player.
+
+.. jcoad:trigger:: mon
+    :suffix: =pokemon
+
+    Gives the player the generated |Pokemon|.
+
+    .. param:: pokemon
+        :type: pokémon
+
+        |Pokemon| to give.
+
+.. jcoad:trigger:: show
+    :suffix: =pokemon
+
+    Shows the player a |Pokemon|.
+
+    .. param:: pokemon
+        :type: ???
+
+        |Pokemon| to show.
+
+.. jcoad:trigger:: trade
+    :suffix: [whom]=for_whom
+
+    Trades one type of |Pokemon| in the player's party for a new |Pokemon|.
+
+    .. param:: whom
+        :type: string
+
+        Type of |Pokemon| needed to trade.
+
+    .. param:: for_whom
+        :type: pokemon
+
+        |Pokemon| the player receives.
+
+.. jcoad:trigger:: giveaway
+    :suffix: =whom
+
+    Gives away one |Pokemon| forever, removing it from the player's party
+
+    .. param:: whom
+        :type: string
+
+        Type of |Pokemon| able to be given away.
+
+.. jcoad:trigger:: money
+    :suffix: =amount
+
+    Adds money to the player's wallet.
+
+    .. param:: amount
+        :type: number
+
+        Amount of money to add. Use a negative number to take money away.
+
+.. jcoad:trigger:: coins
+    :suffix: =amount
+
+    Adds coins to the player's coin case.
+
+    .. param:: amount
+        :type: number
+
+        Amount of coins to add. Use a negative number to take coins away.
+
+.. jcoad:trigger:: starter
+    :suffix: =pokemon
+
+    Gives the |Pokemon| to the player as a starter. Players may only receive one starter per region.
+
+    .. param:: pokemon
+        :type: pokemon
+
+        Starter |Pokemon| to give.
+
+.. jcoad:trigger:: heal
+
+    Heals the target's party.
+
+.. jcoad:trigger:: badge
+    :suffix: =badge
+
+    Gives the user a gym badge.
+
+    .. param:: badge
+        :type: number
+
+        Badge ID to give to the player.
+
+.. jcoad:trigger:: achievement
+    :suffix: =id
+
+    Advances the given achievement by 1.
+
+    .. param:: id
+        :type: number
+
+        Achievement ID to advance.
+
+.. jcoad:trigger:: travel
+
+    Activates the region travel menu.
+
+.. jcoad:trigger:: pc
+
+    Activates the PC.
+
+.. jcoad:trigger:: halloffame
+    :suffix: [=dex]
+
+    Activates the Hall of Fame cutscene for the current region.
+
+    .. param:: dex
+        :type: 0/1
+        :default: 0
+
+        Display Dex progress at the end?
+
+.. jcoad:trigger:: shop
+    :suffix: =item[:price],[item[:price],...]
+
+    Creates a shop with the listed items and prices. An infinite list of items can be provided, with each item being separated by a comma.
+
+    .. param:: item
+        :type: string|number
+
+        Item name or number to sell.
+
+    .. param:: price
+        :type: number
+        :default: Default price
+
+        Price for one item. This price cannot be less than the item's sell price.
+
+.. jcoad:trigger:: buy
+    :suffix: =item[:price],[item[:price],...]
+
+    Creates a shop with the listed items and prices, similar to :jcoad:trigger:`shop`. However, the player may not sell items here; only the buy option is activated.
+
+    .. param:: item
+        :type: string|number
+
+        Item name or number to sell.
+
+    .. param:: price
+        :type: number
+        :default: Default price
+
+        Price for one item. This price cannot be less than the item's sell price.
+
+.. jcoad:trigger:: sell
+
+    Creates a menu that only allows the player to sell items.
+
+.. jcoad:trigger:: replay
+    :suffix: =id
+
+    Replays a previous battle for the player. Basically initiates a battle where the player does nothing.
+
+    .. param:: id
+        :type: number
+
+        Replay ID to watch.
+
+.. jcoad:trigger:: rival
+
+    Puts the "/rival" command into the player's chat.
+
+.. jcoad:trigger:: cycle
+    :suffix: =choice
+
+    Causes the player to start riding a bicycle.
+
+    .. param:: choice
+        :type: yes/no
+        :default: no
+
+        Ride a bicycle?
+
+.. jcoad:trigger:: surf
+    :suffix: =choice
+
+    Causes the target to start surfing.
+
+    .. param:: choice
+        :type: yes/no
+        :default: no
+
+        Surf?
+
+.. jcoad:trigger:: safari
+    :suffix: [=steps]
+
+    Puts the player in a Safari Zone, where they have a certain number of steps before being warped away.
+
+    .. param:: steps
+        :type: number
+        :default: Unsets the state
+
+        Number of steps in the Safari Zone.
+
+Game Appearance
+===============
+
+.. jcoad:trigger:: fadeout
+    :suffix: [=color]
+
+    Fades the screen out to a solid color.
+
+    .. param:: color
+        :type: hex
+        :default: Black
+
+        Solid color to fade out to.
+
+.. jcoad:trigger:: fadein
+    :suffix: [=color]
+
+    Fades the screen in, starting from the given color.
+
+    .. param:: color
+        :type: hex
+        :default: Black
+
+        Solid color to fade in from.
+
+.. jcoad:trigger:: flash
+    :suffix: [=color]
+
+    Flashes the screen with a solid color.
+
+    .. param:: color
+        :type: hex
+        :default: White
+
+        Solid color to flash.
 
 .. jcoad:trigger:: palette
     :suffix: [=hexhex]
@@ -557,6 +770,58 @@ If you are unsure how to use these triggers, check out the :ref:`triggers tutori
 
         Color of overlay.
 
+
+
+
+.. jcoad:trigger:: shake
+    :suffix: [=x,y]
+
+    Shakes the screen, as if there was an earthquake.
+
+    .. param:: x
+        :type: number
+        :default: 0
+
+        Number of pixels to shake horizontally.
+
+    .. param:: y
+        :type: number
+        :default: 0
+
+        Number of pixels to shake vertically.
+
+.. jcoad:trigger:: lookat
+    :suffix: [=x,y]
+
+    Moves the game camera to the given coordinates on the map.
+
+    .. param:: x
+        :type: number
+        :default: Player
+
+        X-coordinate of target tile.
+
+    .. param:: y
+        :type: number
+        :default: Player
+
+        Y-coordinate of target tile.
+
+.. jcoad:trigger:: weather
+    :suffix: [=type]
+
+    Sets the weather the player sees.
+
+    .. param:: type
+        :type: string
+        :default: Resets to no weather
+        :options: downpour, rain, storm, blizzard, snow, hail, hailstorm, fog, mist, spooky, sandstorm, soot, kyle, cherry, confetti, overcast, harsh sunlight, strong winds
+
+        Type of weather.
+
+Sounds
+======
+
 .. jcoad:trigger:: sfx
     :suffix: =sound
 
@@ -588,42 +853,72 @@ If you are unsure how to use these triggers, check out the :ref:`triggers tutori
 
         Plays a |Pokemon|'s cry.
 
-.. jcoad:trigger:: item
-    :suffix: =item[,amount]
+Client Properties
+=================
 
-    Gives the player a given amount of some item.
+.. jcoad:trigger:: zoom
+    :suffix: [=scale]
 
-    .. param:: item
-        :type: string|number
+    Changes the client's game window scale.
 
-        Name or ID number of the item.
-
-    .. param:: amount
+    .. param:: zoom
         :type: number
-        :default: 1
+        :default: 2
 
-        Number of items to give. Use a negative number to take items away from the player.
+        Zoom setting. Use :code:`1` for 100%, or use :code:`0.5` for 50%.
+.. jcoad:trigger:: view
+    :suffix: [=wxh]
 
-.. jcoad:trigger:: mon
-    :suffix: =pokemon
+    Sets the dimensions of the client's game window.
 
-    Gives the player the generated |Pokemon|.
+    .. param:: wxh
+        :type: area|"normal"
+        :default: normal
 
-    .. param:: pokemon
-        :type: pokémon
+        Width and height of the game window. Use :code:`normal` to reset.
 
-        |Pokemon| to give.
 
-.. jcoad:trigger:: show
-    :suffix: =pokemon
+.. jcoad:trigger:: filter
+    :suffix: [=type]
 
-    Shows the player a |Pokemon|.
+    Generates a filter over the game screen.
 
-    .. param:: pokemon
-        :type: ???
+    .. param:: type
+        :type: string:
+        :default: Remove any filter
+        :options: crt, oldfilm, glitch, shockwave, bloom, ascii, godray, rgbsplitter, pixelate, underwater
 
-        |Pokemon| to show.
+        Filter to display.
 
-.. admonition:: TODO
+Other
+=====
 
-    More to come.
+.. jcoad:trigger:: refresh
+
+    Refreshes the client's game. Equivalent to pressing F5 on desktop.
+
+.. jcoad:trigger:: untile
+    :suffix: [=target]
+
+    ???
+
+    .. param:: target
+        :type: number
+        :default: ???
+
+        ???
+
+.. jcoad:trigger:: unspot
+    :suffix: [=target]
+
+    ???
+
+    .. param:: target
+        :type: number
+        :default: ???
+
+        ???
+
+
+
+
