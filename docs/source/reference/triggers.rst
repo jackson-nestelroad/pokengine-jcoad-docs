@@ -376,6 +376,28 @@ Entity Manpulation
 
         Target's opacity.
 
+.. jcoad:trigger:: untile
+    :suffix: [=target]
+
+    Removes a target's :jcoad:cond:`ontile` activation, allowing it to trigger an :jcoad:cond:`ontile` condition again without needing to move.
+
+    .. param:: target
+        :type: string
+        :default: Current target
+
+        Target to impact.
+
+.. jcoad:trigger:: unspot
+    :suffix: [=target]
+
+    Resets a target who has spotted the player.
+
+    .. param:: target
+        :type: string
+        :default: Current target
+
+        Target to impact.
+
 Sprite Manipulation
 ===================
 
@@ -446,7 +468,7 @@ Player Events
 .. jcoad:trigger:: battle
     :suffix: =id
 
-    Initiates a battle.
+    Initiates a battle. There will be a tutorial here eventually...
 
     .. param:: id
         :type: number
@@ -460,13 +482,13 @@ Player Events
 .. jcoad:trigger:: msg
     :suffix: [=target]
 
-    ???
+    Activates a target's :jcoad:prop:`msg` property without the player needing to interact with them.
 
     .. param:: target
         :type: string
-        :default: ???
+        :default: Current target
 
-        ???
+        Target to activate.
 
 .. jcoad:trigger:: item
     :suffix: =item[,amount]
@@ -896,28 +918,6 @@ Other
 .. jcoad:trigger:: refresh
 
     Refreshes the client's game. Equivalent to pressing F5 on desktop.
-
-.. jcoad:trigger:: untile
-    :suffix: [=target]
-
-    ???
-
-    .. param:: target
-        :type: string
-        :default: ???
-
-        ???
-
-.. jcoad:trigger:: unspot
-    :suffix: [=target]
-
-    ???
-
-    .. param:: target
-        :type: string
-        :default: ???
-
-        ???
 
 
 
