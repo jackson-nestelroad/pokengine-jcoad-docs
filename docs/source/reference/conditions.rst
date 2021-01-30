@@ -129,6 +129,10 @@ If you are unsure how to use these object functions, check out the :ref:`conditi
 
         Item name or ID number.
 
+.. jcoad:condition:: party
+
+    The number of |Pokemon| in the player's party.
+
 .. jcoad:condition:: party[name|id]
 
     1 if player has a specified |Pokemon| in their party. 0 otherwise.
@@ -226,6 +230,10 @@ If you are unsure how to use these object functions, check out the :ref:`conditi
 .. jcoad:condition:: rival
 
     The rival's name. See :jcoad:trigger:`rival`.
+
+.. jcoad:condition:: money
+
+    The amount of money in the player's wallet.
 
 .. jcoad:condition:: coins
 
