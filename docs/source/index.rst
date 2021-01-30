@@ -30,6 +30,7 @@ Already know the ropes and looking for documentation? Look no further!
 - :ref:`object_functions`
 - :ref:`properties`
 - :ref:`triggers`
+- :ref:`conditions`
 - :ref:`types`
 - :ref:`pokemon_generation`
 
@@ -41,6 +42,7 @@ Already know the ropes and looking for documentation? Look no further!
     /reference/objects
     /reference/properties
     /reference/triggers
+    /reference/conditions
     /reference/types
     /reference/pokemon_generation
 
