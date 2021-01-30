@@ -53,7 +53,7 @@ class ParamDirective(SphinxDirective):
         if 'type' in self.options and self.options['type']:
             name_node += nodes.Text(' (')
             types = self.options['type'].split('|')
-            type_role: JCoadTypeXRefRole = self.env.get_domain('jcoad').role('type')
+            type_role = self.env.get_domain('jcoad').role('type')
 
             put_separator = False
             for ref_type in types:
@@ -86,6 +86,7 @@ class JCoadObject(ObjectDescription):
     # Prefix right before documentation entry
     display_prefix = None   # type: str
     display_code_block = True   # type: bool
+    prefix_in_code_block = True # type: bool
     space_between_suffix = False    # type: bool
 
     option_spec = {
@@ -172,7 +173,7 @@ class JCoadObject(ObjectDescription):
                     line += self.options['suffix']
                 if 'prefix' in self.options:
                     line = self.options['prefix'] + line
-                if prefix:
+                if prefix and self.prefix_in_code_block:
                     line = prefix + line
                 code_block_content.append(line)
 
@@ -203,8 +204,9 @@ class JCoadTrigger(JCoadObject):
     display_prefix = '&'
 
 
-class JCoadVariable(JCoadObject):
-    display_prefix = '(var) '
+class JCoadCondition(JCoadObject):
+    display_prefix = '(condition) '
+    prefix_in_code_block = False
 
 
 class JCoadType(JCoadObject):
@@ -242,7 +244,7 @@ class JCoadDomain(Domain):
         'function':     ObjType(_('function'), 'func'),
         'property':     ObjType(_('property'), 'prop'),
         'trigger':      ObjType(_('trigger'), 'trigger'),
-        'variable':     ObjType(_('variable'), 'var'),
+        'condition':     ObjType(_('condition'), 'cond'),
         'type':         ObjType(_('type'), 'type'),
         'pokeoption':   ObjType(_('pokeoption'), 'pokeoption')
     }
@@ -250,7 +252,7 @@ class JCoadDomain(Domain):
     directives = {
         'function':     JCoadFunction,
         'trigger':      JCoadTrigger,
-        'variable':     JCoadVariable,
+        'condition':    JCoadCondition,
         'property':     JCoadProperty,
         'type':         JCoadType,
         'pokeoption':   JCoadPokemonOption,
@@ -260,7 +262,7 @@ class JCoadDomain(Domain):
         'func': JCoadFunctionXRefRole(),
         'prop': JCoadPropertyXRefRole(),
         'trigger': JCoadTriggerXRefRole(),
-        'var': XRefRole(),
+        'cond': XRefRole(),
         'type': XRefRole(),
         'pokeoption': XRefRole(),
     }
