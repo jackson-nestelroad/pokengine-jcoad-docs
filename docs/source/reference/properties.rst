@@ -107,7 +107,7 @@ Any entity property ending with :code:`[&triggers]` may have an optional string 
         Color of outline.
 
 .. jcoad:property:: ally
-    :suffix: [=ally1 [ally2 [ally3...]]]
+    :suffix: (ally1 [ally2 [ally3...]])
 
     Sets the target's allies, or following entities.
 
@@ -117,7 +117,7 @@ Any entity property ending with :code:`[&triggers]` may have an optional string 
         Overworld skin of following ally. For multiple allies, separate with spaces.
 
 .. jcoad:property:: skincolor
-    :suffix: [=id]
+    :suffix: (id)
 
     Sets the target's skin color.
 
