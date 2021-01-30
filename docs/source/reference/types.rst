@@ -57,8 +57,9 @@ jCoad does not really have data types, but putting arguments into the proper for
         50 => 50%
         75 => 75%
         100 => 100%
+        200 => 200%
 
-    An integer between 0 and 100 (inclusive), representing a percentage.
+    An integer representing a percentage.
 
 .. jcoad:type:: pokémon
 

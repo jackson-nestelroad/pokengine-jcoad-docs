@@ -316,7 +316,7 @@ Any object function ending with :code:`[&triggers]` may have an optional string 
     .. param:: path
         :type: area
 
-        The NPC's path boundary.
+        The NPC's path boundary. The NPC will wander around this area randomly.
 
 .. jcoad:function:: glow
     :prefix: [name=]
