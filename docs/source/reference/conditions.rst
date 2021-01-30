@@ -138,7 +138,7 @@ If you are unsure how to use these object functions, check out the :ref:`conditi
     1 if player has a specified |Pokemon| in their party. 0 otherwise.
 
     .. param:: name|id
-        :type: pokemon|skin
+        :type: pokémon|skin
 
         Name, dev ID, or skin ID for a |Pokemon|.
 
@@ -147,7 +147,7 @@ If you are unsure how to use these object functions, check out the :ref:`conditi
     If a Dex ID is given, yields the number of |Pokemon| seen in that Dex. If given a |Pokemon|, yields 1 if the player has seen that |Pokemon|.
 
     .. param:: dex|pokemon
-        :type: number|pokemon|skin
+        :type: number|pokémon|skin
 
         Dex ID number or the name, dev ID, or skin ID for a |Pokemon|.
 
@@ -156,7 +156,7 @@ If you are unsure how to use these object functions, check out the :ref:`conditi
     If a Dex ID is given, yields the number of |Pokemon| caught in that Dex. If given a |Pokemon|, yields 1 if the player has caught that |Pokemon|.
 
     .. param:: dex|pokemon
-        :type: number|pokemon|skin
+        :type: number|pokémon|skin
 
         Dex ID number or the name, dev ID, or skin ID for a |Pokemon|.
 
