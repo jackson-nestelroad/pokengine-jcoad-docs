@@ -15,12 +15,23 @@ jCoad does not really have data types, but putting arguments into the proper for
     An area, represented by two integers separated by an "x." Use the format :code:`mxn`, where :code:`m` and :code:`n` are integers.
 
 .. jcoad:type:: depth
+    :examples:
+        map+16
+        void+5
+        fore-5
+        bottom+293
+        fore
+        back
 
-    A depth string that indicates the depth of a sprite or animation drawn in the game. Depth strings may have a few different formats:
+    A depth string that indicates the depth of a sprite or animation drawn in the game. Depth strings consist of a base position and an optional offset.
 
-    - :code:`depth+n` --- Depth offset is relative to the player. :code:`n` is the number of pixels in front of the object the player needs to be to appear in front of it.
-    - :code:`top` --- Sprite is always in the foreground, or above the player.
-    - :code:`back` --- Sprite is always in the background, or behind the player.
+    - :code:`map`/:code:`map+n`/:code:`map-n` --- Depth offset is relative to the base position on the map. :code:`n` is the number of pixels in front of the object the player needs to be to appear in front of it.
+    - :code:`void`/:code:`void+n`/:code:`void-n` --- Depth offset is relative to the void, or the map background.
+    - :code:`fore`/:code:`fore+n`/:code:`fore-n` --- Depth offset is relative to just above the foreground, or always above the player.
+    - :code:`back`/:code:`back+n`/:code:`back-n` --- Depth offset is relative to just above the background, or always behind the player.
+    - :code:`bottom`/:code:`bottom+n`/:code:`bottom-n` --- Depth offset is relative to above the map, but behind the shadows.
+
+    The pixel offsets (:code:`+n` or :code:`-n`), especially when working with a depth other than :code:`map`, are primarily used to place objects relative to one other.
 
 .. jcoad:type:: direction
     :options: up, down, left, right
