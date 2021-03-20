@@ -58,8 +58,9 @@ The following options can be placed after the identification string, in any orde
         pikachu;level 5
         pikachu;level 5,10,15
         pikachu;level 5-15
+        pikachu;level same
 
-    Set the |Pokemon|'s level. Can be a single number, multiple comma-separated values, or a range of values.
+    Set the |Pokemon|'s level. Can be a single number, multiple comma-separated values, or a range of values. Use :code:`same` if initiating a trade and you want the new |Pokemon| to be the same level as the traded |Pokemon|.
 
 .. jcoad:pokeoption:: nickname
     nick
