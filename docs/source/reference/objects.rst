@@ -55,13 +55,17 @@ Any object function ending with :code:`[&triggers]` may have an optional string 
         msg(Take the fruit?)&answers=Yes,No
         Yes=answer(You took the fruit.)
         No=answer(You left the fruit.)
+        ::
+        msg(Do you love me?)&answers=Yes,Yes
+        Yes#1=answer(Good.)
+        Yes#2=answer(Great.)
 
     Defines the response to specified answers. Use this code after specifying answer options with the :jcoad:trigger:`answers` trigger.
 
     .. param:: Answer
         :type: string
 
-        Answer given by the player, such as "Yes" or "No."
+        Answer given by the player, such as "Yes" or "No." If multiple answers have the same name, you may differentiate them using :code:`#n`, where :code:`n` is a number.
 
     .. param:: text
         :type: string

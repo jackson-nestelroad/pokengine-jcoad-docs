@@ -152,7 +152,7 @@ class JCoadObject(ObjectDescription):
                 options={
                     'caption': 'Examples',
                 },
-                content=[self.options['examples']],
+                content=[self.options['examples'].replace('\n::\n', '\n\n')],
                 lineno=self.lineno,
                 content_offset=self.content_offset,
                 block_text='',
