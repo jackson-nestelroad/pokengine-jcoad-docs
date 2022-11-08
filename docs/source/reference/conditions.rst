@@ -169,25 +169,25 @@ If you are unsure how to use these object functions, check out the :ref:`conditi
     Checks the beaten value at designated x,y coordinates.
 
 .. jcoad:condition:: battlewon
-
-    Value is the battle ID of the last battle the player won, either a trainer's battle ID or a |Pokemon| name. 0 if player has not battled.
-    :examples: 
+    :examples:
         if battlewon=350 and ontile=natalie
         msg(Congrats, you have earned the Wilds Badge!)
+
+    Value is the battle ID of the last battle the player won, either a trainer's battle ID or a |Pokemon| name. 0 if player has not battled.
 
 .. jcoad:condition:: battlelost
 
     Value is the battle ID of the last battle the player lost, either a trainer's battle ID or a |Pokemon| name. 0 if player has not battled.
     
 .. jcoad:condition:: caught
-
-    Value is the battle ID of the last battle in which the player captured a |Pokemon|, either a trainer's battle ID or a |Pokemon| name. 0 if player has not captured anything.
-    :examples: 
+    :examples:
         if !ev[mewtwo]
         mewtwo=npc(543,down)
         mewtwo.msg(Mew!)&battle=mewtwo;level 70;moves 129,112,94,105;scene 42
         if ontile=mewtwo and caught=mewtwo
         execute(ev[mewtwo]=1)
+
+    Value is the battle ID of the last battle in which the player captured a |Pokemon|, either a trainer's battle ID or a |Pokemon| name. 0 if player has not captured anything.
 
 .. jcoad:condition:: battled
 
