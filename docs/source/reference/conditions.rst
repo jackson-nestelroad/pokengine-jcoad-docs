@@ -162,23 +162,36 @@ If you are unsure how to use these object functions, check out the :ref:`conditi
 
 .. jcoad:condition:: beaten
 
-    The number of times the player has beaten a trainer.
+    The number of times the player has beaten a trainer. Saves to the specific tile.
 
 .. jcoad:condition:: beaten[x,y]
 
-    ???
+    Checks the beaten value at designated x,y coordinates.
 
 .. jcoad:condition:: battlewon
+    :examples:
+        if battlewon=350 and ontile=natalie
+        msg(Congrats, you have earned the Wilds Badge!)
 
-    1 when the player wins the battle. 0 otherwise.
+    Value is the battle ID of the last battle the player won, either a trainer's battle ID or a |Pokemon| name. 0 if player has not battled.
 
 .. jcoad:condition:: battlelost
 
-    1 when the player loses the battle. 0 otherwise.
+    Value is the battle ID of the last battle the player lost, either a trainer's battle ID or a |Pokemon| name. 0 if player has not battled.
+    
+.. jcoad:condition:: caught
+    :examples:
+        if !ev[mewtwo]
+        mewtwo=npc(543,down)
+        mewtwo.msg(Mew!)&battle=mewtwo;level 70;moves 129,112,94,105;scene 42
+        if ontile=mewtwo and caught=mewtwo
+        execute(ev[mewtwo]=1)
+
+    Value is the battle ID of the last battle in which the player captured a |Pokemon|, either a trainer's battle ID or a |Pokemon| name. 0 if player has not captured anything.
 
 .. jcoad:condition:: battled
 
-    1 when any battle finishes, including spectating. 0 otherwise.
+    Value is the battle ID of the last battle the player participated in regardless of outcome, either a trainer's battle ID or a |Pokemon| name. 0 if player has not battled.
 
 .. jcoad:condition:: starter
 
