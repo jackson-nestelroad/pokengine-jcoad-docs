@@ -217,6 +217,9 @@ class JCoadPokemonOption(JCoadObject):
     display_prefix = ''
     space_between_suffix = True
 
+class JCoadBattleOption(JCoadObject):
+    display_prefix = ''
+    space_between_suffix = True
 
 class JCoadFunctionXRefRole(XRefRole):
     def process_link(self, env: BuildEnvironment, refnode: Element,
@@ -246,7 +249,8 @@ class JCoadDomain(Domain):
         'trigger':      ObjType(_('trigger'), 'trigger'),
         'condition':     ObjType(_('condition'), 'cond'),
         'type':         ObjType(_('type'), 'type'),
-        'pokeoption':   ObjType(_('pokeoption'), 'pokeoption')
+        'pokeoption':   ObjType(_('pokeoption'), 'pokeoption'),
+        'battleoption': ObjType(_('battleoption'), 'battleoption'),
     }
 
     directives = {
@@ -256,6 +260,7 @@ class JCoadDomain(Domain):
         'property':     JCoadProperty,
         'type':         JCoadType,
         'pokeoption':   JCoadPokemonOption,
+        'battleoption': JCoadBattleOption,
     }
 
     roles = {
@@ -265,6 +270,7 @@ class JCoadDomain(Domain):
         'cond': XRefRole(),
         'type': XRefRole(),
         'pokeoption': XRefRole(),
+        'battleoption': XRefRole(),
     }
 
     initial_data = {

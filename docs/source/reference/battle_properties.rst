@@ -46,37 +46,39 @@ Types of Battle Properties
     Levels of the opposing |Pokemon| are hidden. Appear as ???.
 
 .. jcoad:battleoption:: fixedlevel
-	:suffix: level
+    :suffix: level
 
     Forces all |Pokemon| in battle to the specified level. Uses their true stats (IVs, EVs) but calculates the actual stat value (attack, etc) based on the new set level. This works identically to fixed level battles such as the Battle Tower in the mainline games.
 
 .. jcoad:battleoption:: scene
-	:suffix: id
+    :suffix: id
 
     Sets the battle scene (background image) to the one specified. Only necessary for wild battles, as trainer battles have a scene property set in advance.
 
 .. jcoad:battleoption:: theme
-	:suffix: url
+    :suffix: url
 
     Sets the music playing during battle. Not currently working because SoundCloud blocked us.
-	:code:`theme sc:vetrom/battle-battle-tower-remix-cover-pokemon-sword-and-shield` |emdash| Sets the theme according to this SoundCloud url.
+    :code:`theme sc:vetrom/battle-battle-tower-remix-cover-pokemon-sword-and-shield` |emdash| Sets the theme according to this SoundCloud url.
 
 
 
 Examples
 ============================
 
-Example 1: Wild |Pokemon| Boss
+**Example 1:** Wild |Pokemon| Boss
 This first example is a boss battle against a wild |Pokemon|. You cannot run or catch it, and the level is hidden. The |Pokemon|'s name is also set to hide its species.
+
 .. code-block::
 
-	msg(Groouuugoooough!!)&!cry=517,3,2&battle=517,3,2;level 80;name ???;scene 51;hiddenlevel;nomoney;nocatch;norun
+    msg(Groouuugoooough!!)&!cry=517,3,2&battle=517,3,2;level 80;name ???;scene 51;hiddenlevel;nomoney;nocatch;norun
 
 
-Example 2: Battle Tower
-This example is from the HUB Battle Tower. The dialogue in the msg() block and the trainer battle ID are both controlled by a list. The variable :code:`var[noblackout]=1` is set so that the player will not teleport away if they lose the battle. 
+**Example 2:** Battle Tower
+This example is from the HUB Battle Tower. The dialogue in the :jcoad:func:`msg` block and the trainer battle ID are both controlled by a list. The variable :code:`var[noblackout]=1` is set so that the player will not teleport away if they lose the battle.
 
 Similar to the mainline games' Battle Tower, this battle gives no exp or money, but instead I manually give the player BP if they win (not shown). Items are not allowed, and all participating |Pokemon| are set to level 50 for the duration of the battle.
+
 .. code-block::
 
-	msg(%list[trainers][n].speech%)&var[noblackout]=1&mapvar[battle]=3&battle=%list[trainers][n].battleid%;noexp;nomoney;noseen;noitems;fixedlevel 50;theme sc:vetrom/battle-battle-tower-remix-cover-pokemon-sword-and-shield
+    msg(%list[trainers][n].speech%)&var[noblackout]=1&mapvar[battle]=3&battle=%list[trainers][n].battleid%;noexp;nomoney;noseen;noitems;fixedlevel 50;theme sc:vetrom/battle-battle-tower-remix-cover-pokemon-sword-and-shield
