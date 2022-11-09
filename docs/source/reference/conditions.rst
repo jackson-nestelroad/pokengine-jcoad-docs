@@ -6,6 +6,10 @@ Conditions
 
 If you are unsure how to use these object functions, check out the :ref:`conditions tutorial<conditions_tutorial>`.
 
+NOTE: Do not use %% in conditions, even if you do when assigning variables. For example,
+:code:`if var[a]!=hour`
+:code:`var[a]=%hour%`
+
 .. jcoad:condition:: random[n]
 
     A random integer between 1 and :code:`n`.
@@ -217,6 +221,10 @@ If you are unsure how to use these object functions, check out the :ref:`conditi
 .. jcoad:condition:: traded
 
     1 if the player has traded. 0 otherwise.
+    
+.. jcoad:condition:: gaveaway
+
+    1 if the player has just given away a Pokemon with &giveaway. 0 otherwise.
 
 .. jcoad:condition:: season
     :options: winter, spring, summer, fall
