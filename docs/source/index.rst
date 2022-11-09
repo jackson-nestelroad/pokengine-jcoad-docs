@@ -45,6 +45,7 @@ Already know the ropes and looking for documentation? Look no further!
     /reference/conditions
     /reference/types
     /reference/pokemon_generation
+    /reference/battle_properties
 
 Examples
 ========
