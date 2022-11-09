@@ -292,3 +292,11 @@ NOTE: Do not use %% in conditions, even if you do when assigning variables. For 
         :type: number
 
         Integer between 1 and 6 for the party slot to check.
+        
+.. jcoad:condition:: onload
+
+    1 if map has just loaded, 0 otherwise.
+    
+.. jcoad:condition:: refreshed
+
+    1 if player has just refreshed, 0 otherwise.
