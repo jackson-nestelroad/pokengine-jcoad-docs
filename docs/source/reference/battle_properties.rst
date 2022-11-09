@@ -58,8 +58,8 @@ Types of Battle Properties
 .. jcoad:battleoption:: theme
     :suffix: url
 
-    Sets the music playing during battle. Not currently working because SoundCloud blocked us.
-    :code:`theme sc:vetrom/battle-battle-tower-remix-cover-pokemon-sword-and-shield` |emdash| Sets the theme according to this SoundCloud url.
+    Sets the music playing during battle. Currently hosting on Dropbox is supported only. The format is :code:`db:` for host, then a modified URL which cuts out the :code:`https://www.dropbox.com/` part.
+    :code:`theme db:s/fo7smcp2luvrikc/BattleTowerSWSHRemix.mp3` |emdash| Sets the theme according to this Dropbox shared URL.
 
 
 
@@ -81,4 +81,4 @@ Similar to the mainline games' Battle Tower, this battle gives no exp or money, 
 
 .. code-block::
 
-    msg(%list[trainers][n].speech%)&var[noblackout]=1&mapvar[battle]=3&battle=%list[trainers][n].battleid%;noexp;nomoney;noseen;noitems;fixedlevel 50;theme sc:vetrom/battle-battle-tower-remix-cover-pokemon-sword-and-shield
+    msg(%list[trainers][n].speech%)&var[noblackout]=1&mapvar[battle]=3&battle=%list[trainers][n].battleid%;noexp;nomoney;noseen;noitems;fixedlevel 50;theme db:s/fo7smcp2luvrikc/BattleTowerSWSHRemix.mp3
