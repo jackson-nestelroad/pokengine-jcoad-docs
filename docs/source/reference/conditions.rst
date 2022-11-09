@@ -7,8 +7,11 @@ Conditions
 If you are unsure how to use these object functions, check out the :ref:`conditions tutorial<conditions_tutorial>`.
 
 NOTE: Do not use %% in conditions, even if you do when assigning variables. For example,
-:code:`if var[a]!=hour`
-:code:`var[a]=%hour%`
+.. code-block::
+
+    if var[a]!=hour
+    var[a]=%hour%
+
 
 .. jcoad:condition:: random[n]
 
