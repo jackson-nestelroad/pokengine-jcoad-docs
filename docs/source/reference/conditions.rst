@@ -6,11 +6,14 @@ Conditions
 
 If you are unsure how to use these object functions, check out the :ref:`conditions tutorial<conditions_tutorial>`.
 
-NOTE: Do not use %% in conditions, even if you do when assigning variables. For example,
-.. code-block::
+.. note::
+    
+    Do not use %% in conditions, even if you do when assigning variables. For example,
 
-    if var[a]!=hour
-    var[a]=%hour%
+    .. code-block::
+
+        if var[a]!=hour
+        var[a]=%hour%
 
 
 .. jcoad:condition:: random[n]
@@ -227,7 +230,7 @@ NOTE: Do not use %% in conditions, even if you do when assigning variables. For 
     
 .. jcoad:condition:: gaveaway
 
-    1 if the player has just given away a Pokemon with &giveaway. 0 otherwise.
+    1 if the player has just given away a Pokemon with :jcoad:trigger:`giveaway`. 0 otherwise.
 
 .. jcoad:condition:: season
     :options: winter, spring, summer, fall
