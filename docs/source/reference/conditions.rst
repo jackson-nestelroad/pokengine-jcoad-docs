@@ -6,6 +6,16 @@ Conditions
 
 If you are unsure how to use these object functions, check out the :ref:`conditions tutorial<conditions_tutorial>`.
 
+.. note::
+    
+    Do not use %% in conditions, even if you do when assigning variables. For example,
+
+    .. code-block::
+
+        if var[a]!=hour
+        var[a]=%hour%
+
+
 .. jcoad:condition:: random[n]
 
     A random integer between 1 and :code:`n`.
@@ -217,6 +227,10 @@ If you are unsure how to use these object functions, check out the :ref:`conditi
 .. jcoad:condition:: traded
 
     1 if the player has traded. 0 otherwise.
+    
+.. jcoad:condition:: gaveaway
+
+    1 if the player has just given away a Pokemon with :jcoad:trigger:`giveaway`. 0 otherwise.
 
 .. jcoad:condition:: season
     :options: winter, spring, summer, fall
@@ -284,3 +298,11 @@ If you are unsure how to use these object functions, check out the :ref:`conditi
         :type: number
 
         Integer between 1 and 6 for the party slot to check.
+        
+.. jcoad:condition:: onload
+
+    1 if map has just loaded, 0 otherwise.
+    
+.. jcoad:condition:: refreshed
+
+    1 if player has just refreshed, 0 otherwise.
