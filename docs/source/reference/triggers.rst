@@ -624,6 +624,61 @@ Player Events
 
         Display Dex progress at the end?
 
+.. jcoad:trigger:: movelearner
+    :suffix: =max[:number];slot[:number];lock;illegal;cost[:itemUID|money|soot|coins|ev[evName]|mapVar[mapVarName] amount];moves[:moveUID,nextMoveUID,...]
+
+    Creates a move tutor interface of either the moves the mon should be able to know based on level, or from a given list.
+    
+    If a region variable "move_learner_context" is set, users can right-click mons in their party to relearn moves directly.
+
+    Parameters are separated by ``;``.
+
+    Here are some examples:
+
+    ``&movelearner`` will open the move relearn interface, with no cost, allow the user to learn multiple moves without being kicked out, and let user swap between mons.
+    
+    ``&movelearner=max:1;cost:money 1000;moves:07nhrhjt;`` will open a "move tutor" who costs 1000 money to learn a move, kicks the user out after teaching 1 move, and only teaches Explosion.
+
+    .. param:: max
+        :type: number
+    
+    The number of moves that can be learned in this instance of using the tutor.  Used in conjunction with ``cost:`` to forcibly close the tutor after a move is learned.
+
+    .. param:: slot
+        :type: number
+
+    A number between 1 and 6, specifies which mon the tutor should open to. Defaults to 1. Ex: ``slot:3`` would open to the third slot.
+
+    .. param:: lock
+
+    Specifying just ``lock;`` will make it so the user cannot swap to different mons while in the interface.
+
+    .. param:: illegal
+    
+    Allows moves in the interface to be taught regardless of whether or not the mon should be allowed to know it.  USE WISELY.
+
+    .. param:: cost
+        :type: string
+
+    List of values in ``type amount, type2 amount2, etc.;`` format, separated by commas.
+
+    What cost should be paid per move learned.  It is HIGHLY recommended you also set ``max:1`` when using this.  The tutor interface does NOT check if the user can pay said cost, you will need proper if conditions preceeding its use.
+
+    This supports itemUIDs, money specifications such as ``money``, ``soot``, ``coins``, or even ``ev`` or ``mapVar`` for using ``ev[BP]`` etc.  If no amount is specified, the default value 1 will be used.
+    If the mapVar or ev doesn't exist, one will be made at value 0 and the amount will be subtracted from it.
+
+    Multiple costs may be defined by separating each with commas, and ALL costs will be paid upon teaching a move.
+
+    Costs will be paid upon the move being taught and saved, to avoid refresh-cheating the system's costs.
+
+    .. param:: moves
+        :type: string
+
+    String of move UIDs separated by commas. ``moves:UID,UID2,UID3,etc.;``
+
+    Optional, but if provided will change this interface from a "move relearn" interface to a "move tutor" interface.
+    
+
 .. jcoad:trigger:: shop
     :suffix: =item[:price],[item[:price],...]
 
