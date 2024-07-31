@@ -152,6 +152,207 @@ If you are unsure how to use these object functions, check out the :ref:`conditi
 
         Name, dev ID, or skin ID for a |Pokemon|.
 
+.. jcoad:condition:: partyHas[searchFor|collections|copyright|eggGroups|evolutions|slot|species|tags|types|mon]
+
+    1 if the condition is true, 0 otherwise.
+    
+    This only accepts 1 param, a string containing multiple sub parameters.
+
+    The conditional string accepts a wide array of potential values.
+    
+    Each condition is separated by &, and is treated as an "and" conditionally.
+    
+    Most/all conditions can be used multiple times (just not "searchFor")
+
+    Spacing is allowed if it helps legibility, though avoid using it in the value for the "mon" condition.
+    
+    ``if partyHas[searchfor=any & evolutions = 1 & slot = 1]``
+    
+    Is a valid value, and translates to "Any mon in the party that has an immediate evo and is in the first slot."
+
+    Below is documentation for each sub parameter/conditional capable of being used.
+
+    .. param:: searchFor
+
+        Accepts "any" or "all" as valid values.
+        
+        Defaults to "any" if not specified at all.
+
+        Preferably the first condition, this specifies how the condition should behave.
+
+        "any" - Find if there is ANY mon in the party that meets ALL the conditions in this check.
+
+        "all" - Check to see that ALL mons in the party meet ALL the conditions in this check.
+
+        ``if partyHas[searchfor=all&type=bug]``
+
+        Would be 'true' if the player's party is entirely pokemon that are at least bug type.
+
+    .. param:: collections
+
+        Accepts any number of UIDs of collections the mon/mons may be from, separated by commas.
+
+        If specified, no matter how many acceptable collections are provided, the mon/mons must belong to AT LEAST ONE of them.
+
+        ``if partyHas[collections=10f6gxci,10hvquu7]``
+        
+        Would be "Any mon that is in the HUB OR Rica collections"
+
+    .. param:: copyright
+
+        Whether or not the mon/mons should be copyright.
+
+        Often used to identify Nintendo mons.
+
+        ``if partyHas[copyright=1]``
+
+        Would mean "if the player's party has ANY copyright mon"
+
+    .. param:: eggGroups
+
+        Accepts names of egg groups separated by commas.
+
+        The egg groups you want the mon/mons to belong to.
+
+        ``if partyHas[eggGroups=mineral,water 2,field]``
+        
+        Would be "Any mon that belongs to AT LEAST ONE of the egg groups: mineral, water 2, or field"
+    
+    .. param:: evolutions
+
+        Accepts whole numbers or whole numbers that are preceeded by ``>,>=,<,<=``
+
+        The number of IMMEDIATE evolutions the mon/mons should have.
+
+        ``if partyHas[evolutions=>=1]``
+
+        Would be "Any mon that has one or more possible immediate evolutions
+
+    .. param:: slot
+
+        Accepts whole numbers (1 to 6) or whole numbers (1 to 6) that are preceeded by ``>,>=,<,<=``
+
+        The slot the mon should be in.
+
+        Do not attempt to use this with searchfor=all as it will not work.
+
+        ``if partyHas[slot=>=4]``
+        
+        Would be "any mon exists in the 4th, 5th and 6th slots."
+
+        ``if partyHas[slot=4&type=ground]``
+
+        Would be "If the player has a ground type in their 4th slot"
+
+    .. param:: species
+
+        Accepts any species UIDs OR species names.
+
+        If specified, no matter how many UIDs are provided, the mon/mons must belong to AT LEAST ONE of them, not ALL of them.
+
+        ``if partyHas[species=0027xe3s]``
+        
+        Would be "any mon that is EXACTLY this SPECIFIC trapinch species that matches this UID"
+
+        ``if partyHas[species=Trapinch]``
+
+        Would be "any mon that is ANY species named Trapinch"
+
+    .. param:: tags
+
+        Accepts any string values separated by commas.
+
+        The tags the mon should have in the pokengine database site.
+
+        If specified, no matter how many tags are provided, the mon/mons must belong to AT LEAST ONE of them, not ALL of them.
+
+        Tags ARE case sensitive here.
+
+        ``if partyHas[tags=King,knight]``
+
+        Would be "If the party has any mon that has the tag 'King' OR 'knight' "
+
+    .. param:: types
+
+        Accepts any number of types by name separated by commas.
+
+        If specified, no matter how many types are provided, the mon/mons must belong to AT LEAST ONE of them, not ALL of them.
+
+        ``if partyHas[types=bug]``
+
+        Would be "any mon that has the type bug"
+
+        ``if partyHas[types=bug,ground]``
+
+        Would be "any mon that has the type bug OR ground"
+
+        ``if partyHas[types=bug&type=ground]``
+
+        Would be "any mon that has the type bug AND ground"
+
+        ``if partyHas[searchfor=all&types=bug,ground]``
+
+        Would be "All mons in party are at least bug OR at least ground"
+
+        ``if partyHas[searchfor=all&types=bug&types=ground]``
+
+        Would be "All mons in party are at least bug AND ground"
+
+    .. param:: mon
+
+        Accepts a value very similar to a mon generation string, with a few slight variances.
+
+        Each of these sub-conditions are separated by ; and their sub-sub-condition values are separated by commas (see the ivs in the examples below)
+
+        - level / lv / l - mon level, accepts whole numbers and >,>=,<=,<
+
+        - nickname / name / n - the mon's name (or nickname if set)
+
+        - male / m - the mon's gender being male
+
+        - female / f - the mon's gender being female
+
+        - status / q - the mon's status, accepts status like "poison" and "paralyze" etc.
+
+        - hp / h - the mon's current hp, accepts whole numbers and >,>=,<=,<
+
+        - ability / a - ability UID the mon should have
+
+        - nature / p - nature the mon should have, accepts whole text like 'hardy'
+
+        - moves / o - moves the mon should have AT LEAST ONE of, move UIDs separated by commas
+
+        - item / b - item the mon should have, item UID
+
+        - happiness / friendship / w - happiness value the mon should have, accepts whole numbers and >,>=,<=,<
+
+        - egg / y - number of egg steps remaining till hatch, accepts whole numbers and >,>=,<=,<
+
+        - IVs / ivs / i - IVs the mon should have, accepts whole numbers and >,>=,<=,< or # for 'any'
+
+        - EVs / evs / e - EVs the mon should have, accepts whole numbers and >,>=,<=,< or # for 'any'
+
+        - baseStats - Stats the mon's species should have, accepts whole numbers and >,>=,<=,< or # for 'any'
+
+        - rainbow - if the mon should be rainbow, accepts just "rainbow" no value
+
+        - golden - if the mon should be rainbow, accepts just "golden" no value
+
+        - shiny - if the mon should be rainbow, accepts just "shiny" no value
+
+        - steps - if the mon should have a number of steps, accepts whole numbers and >,>=,<=,<
+
+        - uid / u - The UID of the species the mon should be. Accepted if no key before:
+
+
+        ``if partyHas[searchFor=any&mon=male;status poison;IVs 31,>=15,#,#,#,0]``
+        
+        Would be "any male mon that is poisoned, has exactly 31 HP iv and at least 15 attack iv, exactly 0 iv, with any other ivs."
+        Similar syntax would be used for specifying evs.
+
+
+
+
 .. jcoad:condition:: seen[dex|pokemon]
 
     If a Dex ID is given, yields the number of |Pokemon| seen in that Dex. If given a |Pokemon|, yields 1 if the player has seen that |Pokemon|.
@@ -161,7 +362,7 @@ If you are unsure how to use these object functions, check out the :ref:`conditi
 
         Dex ID number or the name, dev ID, or skin ID for a |Pokemon|.
 
-.. jcoad:condition:: caught[dex|pokemon|
+.. jcoad:condition:: caught[dex|pokemon|]
 
     If a Dex ID is given, yields the number of |Pokemon| caught in that Dex. If given a |Pokemon|, yields 1 if the player has caught that |Pokemon|.
 
