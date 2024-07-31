@@ -304,45 +304,45 @@ If you are unsure how to use these object functions, check out the :ref:`conditi
 
         Each of these sub-conditions are separated by ; and their sub-sub-condition values are separated by commas (see the ivs in the examples below)
 
-        level / lv / l - mon level, accepts whole numbers and >,>=,<=,<
+        - level / lv / l - mon level, accepts whole numbers and >,>=,<=,<
 
-        nickname / name / n - the mon's name (or nickname if set)
+        - nickname / name / n - the mon's name (or nickname if set)
 
-        male / m - the mon's gender being male
+        - male / m - the mon's gender being male
 
-        female / f - the mon's gender being female
+        - female / f - the mon's gender being female
 
-        status / q - the mon's status, accepts status like "poison" and "paralyze" etc.
+        - status / q - the mon's status, accepts status like "poison" and "paralyze" etc.
 
-        hp / h - the mon's current hp, accepts whole numbers and >,>=,<=,<
+        - hp / h - the mon's current hp, accepts whole numbers and >,>=,<=,<
 
-        ability / a - ability UID the mon should have
+        - ability / a - ability UID the mon should have
 
-        nature / p - nature the mon should have, accepts whole text like 'hardy'
+        - nature / p - nature the mon should have, accepts whole text like 'hardy'
 
-        moves / o - moves the mon should have AT LEAST ONE of, move UIDs separated by commas
+        - moves / o - moves the mon should have AT LEAST ONE of, move UIDs separated by commas
 
-        item / b - item the mon should have, item UID
+        - item / b - item the mon should have, item UID
 
-        happiness / friendship / w - happiness value the mon should have, accepts whole numbers and >,>=,<=,<
+        - happiness / friendship / w - happiness value the mon should have, accepts whole numbers and >,>=,<=,<
 
-        egg / y - number of egg steps remaining till hatch, accepts whole numbers and >,>=,<=,<
+        - egg / y - number of egg steps remaining till hatch, accepts whole numbers and >,>=,<=,<
 
-        IVs / ivs / i - IVs the mon should have, accepts whole numbers and >,>=,<=,< or # for 'any'
+        - IVs / ivs / i - IVs the mon should have, accepts whole numbers and >,>=,<=,< or # for 'any'
 
-        EVs / evs / e - EVs the mon should have, accepts whole numbers and >,>=,<=,< or # for 'any'
+        - EVs / evs / e - EVs the mon should have, accepts whole numbers and >,>=,<=,< or # for 'any'
 
-        baseStats - Stats the mon's species should have, accepts whole numbers and >,>=,<=,< or # for 'any'
+        - baseStats - Stats the mon's species should have, accepts whole numbers and >,>=,<=,< or # for 'any'
 
-        rainbow - if the mon should be rainbow, accepts just "rainbow" no value
+        - rainbow - if the mon should be rainbow, accepts just "rainbow" no value
 
-        golden - if the mon should be rainbow, accepts just "golden" no value
+        - golden - if the mon should be rainbow, accepts just "golden" no value
 
-        shiny - if the mon should be rainbow, accepts just "shiny" no value
+        - shiny - if the mon should be rainbow, accepts just "shiny" no value
 
-        steps - if the mon should have a number of steps, accepts whole numbers and >,>=,<=,<
+        - steps - if the mon should have a number of steps, accepts whole numbers and >,>=,<=,<
 
-        uid / u - The UID of the species the mon should be. Accepted if no key before:
+        - uid / u - The UID of the species the mon should be. Accepted if no key before:
 
 
         ``if partyHas[searchFor=any&mon=male;status poison;IVs 31,>=15,#,#,#,0]``
